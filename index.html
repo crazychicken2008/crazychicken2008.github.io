@@ -3,75 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRAZY CHICKEN 2008 | OFFICIAL</title>
+    <title>CRAZY CHICKEN 2008 | OFFICIAL HUB</title>
     <style>
         :root {
-            --main-color: #ffcc00;
-            --bg-color: #0a0a0a;
+            --main-gold: #ffcc00;
+            --yt-red: #ff0000;
+            --tt-cyan: #00f2ea;
+            --tt-pink: #ff0050;
+            --line-green: #06c755;
+            --discord-blurple: #5865f2;
+            --bg-dark: #050505;
         }
+
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-dark);
             color: white;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            text-transform: uppercase;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-        .main-container {
-            text-align: center;
-            position: relative;
-            padding: 40px;
-            border: 2px solid var(--main-color);
-            background: rgba(255, 204, 0, 0.05);
-            box-shadow: 0 0 30px rgba(255, 204, 0, 0.2);
-            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0% 30%);
-        }
-        h1 {
-            font-size: 3.5rem;
-            margin: 0;
-            letter-spacing: 5px;
-            color: var(--main-color);
-            text-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
-        }
-        .subtitle {
-            font-size: 1rem;
-            letter-spacing: 8px;
-            margin-top: 10px;
-            color: #888;
-        }
-        .status-bar {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            color: var(--main-color);
-            border-top: 1px solid rgba(255, 204, 0, 0.3);
-            padding-top: 15px;
-        }
-        /* 装飾用のスキャンライン */
-        body::before {
-            content: " ";
-            position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 2px, 3px 100%;
+
+        /* 背景のスキャンライン演出 */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 3px 100%;
             pointer-events: none;
+            z-index: 100;
+        }
+
+        .container {
+            text-align: center;
             z-index: 10;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            letter-spacing: 4px;
+            color: var(--main-gold);
+            text-shadow: 0 0 20px rgba(255, 204, 0, 0.6);
+            margin-bottom: 5px;
+        }
+
+        .id-tag {
+            font-size: 0.8rem;
+            color: #666;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        /* リンクボタンのスタイル */
+        .link-card {
+            display: block;
+            text-decoration: none;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            font-weight: bold;
+            letter-spacing: 1px;
+            overflow: hidden;
+        }
+
+        .link-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* 各ボタンの個別色設定 */
+        .youtube:hover { border-color: var(--yt-red); color: var(--yt-red); box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); }
+        .tiktok:hover { border-color: var(--tt-cyan); color: var(--tt-cyan); box-shadow: 0 0 15px rgba(0, 242, 234, 0.3); }
+        .line:hover { border-color: var(--line-green); color: var(--line-green); box-shadow: 0 0 15px rgba(6, 199, 85, 0.3); }
+        .discord:hover { border-color: var(--discord-blurple); color: var(--discord-blurple); box-shadow: 0 0 15px rgba(88, 101, 242, 0.3); }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.7rem;
+            color: #444;
+            letter-spacing: 1px;
+        }
+
+        .glitch-text { animation: glitch 3s infinite; }
+        @keyframes glitch {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
-        <div style="font-size: 0.7rem; color: #555; margin-bottom: 10px;">SYSTEM STATUS: ONLINE</div>
-        <h1>CRAZY CHICKEN</h1>
-        <div class="subtitle">PROJECT 2008</div>
-        
-        <div class="status-bar">
-            [ LOADING EXTERNAL DATA... ]
+    <div class="container">
+        <div style="font-size: 0.7rem; color: var(--main-gold); margin-bottom: 10px;">CONNECTED TO THE NETWORK</div>
+        <h1 class="glitch-text">CRAZY CHICKEN</h1>
+        <div class="id-tag">PROJECT 2008 / OFFICIAL</div>
+
+        <a href="http://www.youtube.com/@crazy_chicken" class="link-card youtube" target="_blank">
+            YouTube @crazy_chicken
+        </a>
+
+        <a href="https://www.tiktok.com/@chickenchicken2008?is_from_webapp=1&sender_device=pc" class="link-card tiktok" target="_blank">
+            TikTok @chickenchicken2008
+        </a>
+
+        <a href="https://line.me/ti/g2/r2JhHVk0T0RPMf5IsrvMFmWhdDnG0ciHu-DWwQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-card line" target="_blank">
+            YCRA 第四階層 [ LINE ]
+        </a>
+
+        <a href="https://discord.gg/VUAVdUspX" class="link-card discord" target="_blank">
+            Tier 4 [ DISCORD ]
+        </a>
+
+        <div class="footer">
+            EST. 2008 | ENCRYPTED ACCESS ONLY<br>
+            &copy; 2026 CRAZY CHICKEN. ALL RIGHTS RESERVED.
         </div>
     </div>
 
