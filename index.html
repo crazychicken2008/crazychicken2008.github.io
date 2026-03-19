@@ -5,24 +5,228 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRAZY CHICKEN | SYSTEM TERMINAL</title>
     <style>
-        body { background-color: #000; color: #0f0; font-family: 'Courier New', monospace; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; overflow: hidden; }
-        .terminal { width: 90%; max-width: 600px; border: 1px solid #0f0; padding: 20px; background: rgba(0, 20, 0, 0.9); box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); }
-        h1 { font-size: 1.8rem; text-shadow: 0 0 10px #0f0; }
-        .link-card { display: block; text-decoration: none; padding: 12px; margin-bottom: 10px; border: 1px solid #0f0; color: #0f0; font-weight: bold; transition: 0.2s; }
-        .link-card:hover { background: #0f0; color: #000; }
+        :root {
+            --hacker-green: #0f0; /* 純粋なハッカーグリーン */
+            --tt-cyan: #00f2ea;
+            --discord-blurple: #5865f2;
+            --bg-dark: #000; /* 完全な黒 */
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--hacker-green);
+            font-family: 'Courier New', Courier, monospace; /* 固定幅フォント */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden; /* スクロールバーを消す */
+            position: relative;
+        }
+
+        /* 背景：マトリックス風デジタル・レイン */
+        #matrix-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.15; /* うっすら流れる感じ */
+        }
+
+        /* 走査線（スキャンライン）エフェクト */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .terminal-window {
+            width: 90%;
+            max-width: 600px;
+            background: rgba(0, 20, 0, 0.9);
+            border: 1px solid var(--hacker-green);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* ウィンドウのヘッダー */
+        .terminal-header {
+            position: absolute;
+            top: 0; left: 0; width: 100%;
+            height: 25px;
+            background: var(--hacker-green);
+            color: black;
+            font-weight: bold;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            box-sizing: border-box;
+        }
+
+        .terminal-content {
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin: 10px 0;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--hacker-green);
+        }
+
+        .cmd-line {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .prompt { color: var(--hacker-green); }
+        .cmd { color: #fff; }
+
+        /* リンクボタン：ハッカープロトコル仕様 */
+        .link-card {
+            display: block;
+            text-decoration: none;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid var(--hacker-green);
+            background: transparent;
+            color: var(--hacker-green);
+            font-weight: bold;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card:hover {
+            background: var(--hacker-green);
+            color: black;
+            box-shadow: 0 0 15px var(--hacker-green);
+            transform: scale(1.02);
+        }
+
+        /* タイプライター風アニメーション（文字が順番に出る） */
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid var(--hacker-green);
+            white-space: nowrap;
+            letter-spacing: .15em;
+            animation: typing 2s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--hacker-green) }
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.7rem;
+            color: rgba(0, 255, 0, 0.5);
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
-    <div class="terminal">
-        <div style="color:#666; font-size:0.8rem;">SYS/TERM - crazychicken2008.github.io</div>
-        <h1>> CRAZY CHICKEN</h1>
-        <p>STATUS: ACTIVE | CLAN: YCRA</p>
+
+    <canvas id="matrix-bg"></canvas>
+
+    <div class="terminal-window">
+        <div class="terminal-header">SYS/TERM - crazychicken2008.github.io</div>
         
-        <a href="http://www.youtube.com/@crazy_chicken" class="link-card" target="_blank">[>] YouTube</a>
-        <a href="https://www.tiktok.com/@chickenchicken2008" class="link-card" target="_blank">[>] TikTok</a>
-        <a href="https://line.me/ti/g2/r2JhHVk0T0RPMf5IsrvMFmWhdDnG0ciHu-DWwQ" class="link-card" target="_blank">[#] YCRA Line Group</a>
-        
-        <a href="./intel" class="link-card" style="border-color: #333; color: #333;">[?] Confidential Data</a>
+        <div class="terminal-content">
+            <div class="cmd-line">
+                <span class="prompt">C:\></span> <span class="cmd typewriter">LOGIN crazychicken...</span>
+            </div>
+            <div class="cmd-line" style="color: #666;">
+                [SUCCESS] IDENTITY CONFIRMED.<br>
+                [INFO] ACCESSING CENTRAL HUB...
+            </div>
+            
+            <h1>&gt; CRAZY CHICKEN</h1>
+            <div class="cmd-line" style="margin-bottom: 25px;">
+                STATUS: <span style="color: #fff; background: var(--hacker-green); padding: 2px 5px;">ACTIVE</span><br>
+                CLAN: YCRA [Tier 4]
+            </div>
+
+            <a href="http://www.youtube.com/@crazy_chicken" class="link-card" target="_blank">
+                [>] YouTube::Channel/crazy_chicken
+            </a>
+
+            <a href="https://www.tiktok.com/@chickenchicken2008" class="link-card" target="_blank">
+                [>] TikTok::Profile/chickenchicken2008
+            </a>
+
+            <a href="https://line.me/ti/g2/r2JhHVk0T0RPMf5IsrvMFmWhdDnG0ciHu-DWwQ" class="link-card" target="_blank">
+                [#] YCRA::Line_Group/Tier4
+            </a>
+
+            <a href="https://discord.gg/VUAVdUspX" class="link-card" target="_blank">
+                [#] Discord::Server/Invite
+            </a>
+
+            <div class="footer">
+                &gt;&gt; PROTOCOL EST. 2008 // DO NOT TRACE &lt;&lt;
+            </div>
+        </div>
     </div>
+
+    <script>
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+
+        const alphabet = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const rainDrops = [];
+
+        for( let x = 0; x < columns; x++ ) {
+            rainDrops[x] = 1;
+        }
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0f0';
+            ctx.font = fontSize + 'px monospace';
+
+            for(let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+
+                if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        setInterval(draw, 30);
+    </script>
+
 </body>
 </html>
