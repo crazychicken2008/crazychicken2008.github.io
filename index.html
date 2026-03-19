@@ -3,134 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRAZY CHICKEN 2008 | OFFICIAL HUB</title>
+    <title>YCRA INTERNAL // CONFIDENTIAL</title>
     <style>
-        :root {
-            --main-gold: #ffcc00;
-            --yt-red: #ff0000;
-            --tt-cyan: #00f2ea;
-            --tt-pink: #ff0050;
-            --line-green: #06c755;
-            --discord-blurple: #5865f2;
-            --bg-dark: #050505;
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: sans-serif; overflow: hidden; }
+
+        /* 第1形態：白い画面（偽装） */
+        #intro {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: white; color: black;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 1000; text-align: center; padding: 20px; box-sizing: border-box;
+        }
+        .btn-access {
+            margin-top: 30px; padding: 15px 40px; font-size: 1.2rem;
+            background: #eee; border: 2px solid #000; cursor: pointer; font-weight: bold;
+        }
+        .btn-access:hover { background: #ddd; }
+
+        /* 第2形態：ハッカートラップ（隠し） */
+        #trap {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; color: #0f0; z-index: 500;
         }
 
-        body {
-            background-color: var(--bg-dark);
-            color: white;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            overflow-x: hidden;
+        /* 動く背景文字 */
+        .scrolling-text {
+            position: absolute; white-space: nowrap; font-size: 2rem;
+            font-weight: bold; font-family: monospace; opacity: 0.3;
+            animation: scroll-left 5s linear infinite;
         }
 
-        /* 背景のスキャンライン演出 */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            background-size: 100% 3px, 3px 100%;
-            pointer-events: none;
-            z-index: 100;
+        @keyframes scroll-left {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
         }
 
-        .container {
-            text-align: center;
-            z-index: 10;
-            width: 90%;
-            max-width: 500px;
+        .warning-box {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9); border: 5px solid #f00; color: #f00;
+            padding: 40px; text-align: center; z-index: 1000;
+            box-shadow: 0 0 50px #f00; animation: flash 0.5s infinite;
         }
 
-        h1 {
-            font-size: 2.2rem;
-            letter-spacing: 4px;
-            color: var(--main-gold);
-            text-shadow: 0 0 20px rgba(255, 204, 0, 0.6);
-            margin-bottom: 5px;
-        }
-
-        .id-tag {
-            font-size: 0.8rem;
-            color: #666;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-        }
-
-        /* リンクボタンのスタイル */
-        .link-card {
-            display: block;
-            text-decoration: none;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            position: relative;
-            background: rgba(255, 255, 255, 0.03);
-            font-weight: bold;
-            letter-spacing: 1px;
-            overflow: hidden;
-        }
-
-        .link-card:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        /* 各ボタンの個別色設定 */
-        .youtube:hover { border-color: var(--yt-red); color: var(--yt-red); box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); }
-        .tiktok:hover { border-color: var(--tt-cyan); color: var(--tt-cyan); box-shadow: 0 0 15px rgba(0, 242, 234, 0.3); }
-        .line:hover { border-color: var(--line-green); color: var(--line-green); box-shadow: 0 0 15px rgba(6, 199, 85, 0.3); }
-        .discord:hover { border-color: var(--discord-blurple); color: var(--discord-blurple); box-shadow: 0 0 15px rgba(88, 101, 242, 0.3); }
-
-        .footer {
-            margin-top: 40px;
-            font-size: 0.7rem;
-            color: #444;
-            letter-spacing: 1px;
-        }
-
-        .glitch-text { animation: glitch 3s infinite; }
-        @keyframes glitch {
-            0% { opacity: 1; }
-            50% { opacity: 0.8; }
-            100% { opacity: 1; }
+        @keyframes flash {
+            0% { opacity: 1; border-color: #f00; }
+            50% { opacity: 0.8; border-color: #500; }
+            100% { opacity: 1; border-color: #f00; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div style="font-size: 0.7rem; color: var(--main-gold); margin-bottom: 10px;">CONNECTED TO THE NETWORK</div>
-        <h1 class="glitch-text">CRAZY CHICKEN</h1>
-        <div class="id-tag">PROJECT 2008 / OFFICIAL</div>
+    <div id="intro">
+        <h2 style="letter-spacing: 5px;">YCRA 機密情報</h2>
+        <p>このサイトは YCRA 第一階層以上のみのアクセスが許可されています。</p>
+        <button class="btn-access" onclick="launchTrap()">[ アクセスを承認する ]</button>
+    </div>
 
-        <a href="http://www.youtube.com/@crazy_chicken" class="link-card youtube" target="_blank">
-            YouTube @crazy_chicken
-        </a>
-
-        <a href="https://www.tiktok.com/@chickenchicken2008?is_from_webapp=1&sender_device=pc" class="link-card tiktok" target="_blank">
-            TikTok @chickenchicken2008
-        </a>
-
-        <a href="https://line.me/ti/g2/r2JhHVk0T0RPMf5IsrvMFmWhdDnG0ciHu-DWwQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-card line" target="_blank">
-            YCRA 第四階層 [ LINE ]
-        </a>
-
-        <a href="https://discord.gg/VUAVdUspX" class="link-card discord" target="_blank">
-            Tier 4 [ DISCORD ]
-        </a>
-
-        <div class="footer">
-            EST. 2008 | ENCRYPTED ACCESS ONLY<br>
-            &copy; 2026 CRAZY CHICKEN. ALL RIGHTS RESERVED.
+    <div id="trap">
+        <div id="bg-container"></div>
+        <div class="warning-box">
+            <h1 style="font-size: 4rem; margin: 0;">ACCESS DENIED</h1>
+            <p style="color: #fff; font-size: 1.5rem;">IP LOGGED. AUTHORITIES NOTIFIED.</p>
+            <div style="font-size: 5rem; margin-top: 20px; font-family: 'Arial Black'; color: #0f0;">JOIN YCRA</div>
         </div>
     </div>
 
+    <script>
+        function launchTrap() {
+            // 画面切り替え
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('trap').style.display = 'block';
+
+            // サイレン音の生成（ブラウザ機能で鳴らします）
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            setInterval(() => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sawtooth'; // 鋭い音
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.5);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.5);
+            }, 600);
+
+            // 背景文字の生成
+            const container = document.getElementById('bg-container');
+            for (let i = 0; i < 30; i++) {
+                const div = document.createElement('div');
+                div.className = 'scrolling-text';
+                div.style.top = (i * 4) + '%';
+                div.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                div.innerText = "JOIN YCRA ".repeat(20);
+                container.appendChild(div);
+            }
+        }
+    </script>
 </body>
 </html>
