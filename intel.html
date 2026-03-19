@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YCRA INTERNAL // CONFIDENTIAL</title>
+    <style>
+        body { background: #000; color: #0f0; font-family: monospace; overflow: hidden; margin: 0; }
+        .bg-text { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-wrap: wrap; opacity: 0.3; font-size: 10px; line-height: 1; z-index: 1; pointer-events: none; }
+        .warning { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 2px solid #0f0; padding: 50px; background: rgba(0,0,0,0.9); text-align: center; z-index: 100; box-shadow: 0 0 30px #0f0; width: 80%; max-width: 500px; }
+        h1 { font-size: 3rem; margin: 0; }
+        p { font-size: 1.2rem; color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="bg-text" id="scroll"></div>
+    <div class="warning">
+        <h1>ACCESS DENIED</h1>
+        <p>Your ID has been logged.<br>Unauthorized access detected.</p>
+        <div style="font-size: 4rem; margin: 20px 0;">JOIN YCRA</div>
+    </div>
+    <script>
+        const container = document.getElementById('scroll');
+        for (let i = 0; i < 5000; i++) {
+            container.innerHTML += "JOIN YCRA ";
+        }
+    </script>
+</body>
+</html>
